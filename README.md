@@ -17,5 +17,6 @@ This project demonstrates the creation of a personal firewall that captures and 
 - Optional Tkinter-based GUI for live monitoring
 
 # How to Run
-1. Install Requirements
+# 1. Install Requirements
+````
    pip install scapy
