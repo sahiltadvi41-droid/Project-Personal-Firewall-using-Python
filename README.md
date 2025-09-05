@@ -69,3 +69,63 @@ sniff(prn=packet_callback, store=False)
 ````
 
 <img width="1916" height="930" alt="image" src="https://github.com/user-attachments/assets/3ad95539-0e8f-439f-b53d-71d56422f072" />
+<img width="1919" height="937" alt="image" src="https://github.com/user-attachments/assets/f2cd0a2b-0431-43dd-b524-d8872b6b7542" />
+
+### 3. Customize Rules
+ Edit the following variables in firewall.py to define custom filtering rules:
+ ````
+allowed_ips = ['192.168.1.1']
+blocked_ports = [23, 445]
+allowed_protocols = ['TCP', 'UDP']
+````
+## Output
+- All blocked and allowed packets are logged in firewall_log.txt with timestamps and reasons.
+- Example:
+````
+2025-07-23 13:45:02.123456 - Blocked: IP / TCP 192.168.1.100:445 > 192.168.1.2
+````
+
+## Optional: GUI Monitoring
+You can build a GUI using Tkinter to display packets in real-time. It will allow you to visualize traffic and alerts as they happen.
+````
+import tkinter as tk
+
+def update_display(text):
+    text_area.insert(tk.END, text + "\n")
+    text_area.see(tk.END)
+
+window = tk.Tk()
+window.title("Firewall Monitor")
+text_area = tk.Text(window, height=20, width=80)
+text_area.pack()
+
+def gui_packet_callback(packet):
+    summary = packet.summary()
+    update_display(summary)
+    if not rule_engine(packet):
+        log_packet(packet, "Blocked")
+
+sniff(prn=gui_packet_callback, store=False)
+window.mainloop()
+
+---
+
+##  Optional: Enforcing with iptables
+To drop packets from blocked IPs using system-level firewall:
+```bash
+sudo iptables -A INPUT -s 192.168.1.100 -j DROP
+````
+
+## Optional: Enforce Rules with iptables
+````
+sudo iptables -A INPUT -s 192.168.1.100 -j DROP
+````
+In Python:
+````
+import os
+os.system("sudo iptables -A INPUT -s 192.168.1.100 -j DROP")
+````
+
+## Conclusion
+This project provides hands-on experience in building a personal firewall using Python. By leveraging Scapy for packet sniffing and rule enforcement, users learn about network protocols, real-time monitoring, and packet-level filtering. It can be expanded with anomaly detection, machine learning, or deeper OS-level integrations for advanced use cases.
+
