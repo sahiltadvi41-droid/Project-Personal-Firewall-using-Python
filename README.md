@@ -20,3 +20,52 @@ This project demonstrates the creation of a personal firewall that captures and 
 ### 1. Install Requirements
 ````
    pip install scapy
+````
+### 2. Run the Script
+````
+sudo python3 firewall.py
+
+firewall.py:- 
+from scapy.all import sniff, IP, TCP, UDP
+import datetime
+
+# Define rule sets
+allowed_ips = ['192.168.1.1']
+blocked_ports = [23, 445]
+allowed_protocols = ['TCP', 'UDP']
+log_file = "firewall_log.txt"
+
+# Log packets to file
+def log_packet(packet, reason):
+    with open(log_file, "a") as f:
+        f.write(f"{datetime.datetime.now()} - {reason}: {packet.summary()}\n")
+
+# Rule engine
+def rule_engine(packet):
+    if IP in packet:
+        src_ip = packet[IP].src
+        proto = packet[IP].proto
+
+        if TCP in packet or UDP in packet:
+            port = packet[TCP].dport if TCP in packet else packet[UDP].dport
+            if src_ip not in allowed_ips:
+                print(f"[!] Blocked IP: {src_ip}")
+                return False
+            if port in blocked_ports:
+                print(f"[!] Blocked Port: {port}")
+                return False
+    return True
+
+# Callback
+def packet_callback(packet):
+    if not rule_engine(packet):
+        log_packet(packet, "Blocked")
+    else:
+        log_packet(packet, "Allowed")
+
+# Start sniffing
+print("[*] Starting Firewall...")
+sniff(prn=packet_callback, store=False)
+````
+
+<img width="1916" height="930" alt="image" src="https://github.com/user-attachments/assets/3ad95539-0e8f-439f-b53d-71d56422f072" />
