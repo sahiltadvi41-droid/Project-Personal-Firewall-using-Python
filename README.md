@@ -10,8 +10,8 @@ This project demonstrates the creation of a personal firewall that captures and 
 - Tkinter (for optional GUI interface)
 - Text editor (e.g., VS Code, nano)
 # Features
-Real-time packet sniffing using Scapy
-Rule-based filtering for IP, port, protocol
-Activity logging with timestamps
-Optional iptables integration for system-level enforcement
-Optional Tkinter-based GUI for live monitoring
+- Real-time packet sniffing using Scapy
+- Rule-based filtering for IP, port, protocol
+- Activity logging with timestamps
+- Optional iptables integration for system-level enforcement
+- Optional Tkinter-based GUI for live monitoring
