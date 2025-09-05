@@ -15,3 +15,7 @@ This project demonstrates the creation of a personal firewall that captures and 
 - Activity logging with timestamps
 - Optional iptables integration for system-level enforcement
 - Optional Tkinter-based GUI for live monitoring
+
+# How to Run
+1. Install Requirements
+   pip install scapy
