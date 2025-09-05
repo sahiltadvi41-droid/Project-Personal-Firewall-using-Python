@@ -4,11 +4,11 @@ In the modern digital landscape, the rise in cyber threats makes personal securi
 # Abstract
 This project demonstrates the creation of a personal firewall that captures and filters network traffic in real-time using Python and the Scapy library. The firewall applies user-defined rules to allow or block packets based on IP addresses, ports, and protocols. Logged data provides visibility into allowed and blocked communications, while optional integrations with Linux iptables and a Tkinter GUI add enforcement and interactivity.
 # Tools Used
-Python 3
-Scapy (pip install scapy)
-Linux iptables (for enforcing rules)
-Tkinter (for optional GUI interface)
-Text editor (e.g., VS Code, nano)
+- Python 3
+- Scapy (pip install scapy)
+- Linux iptables (for enforcing rules)
+- Tkinter (for optional GUI interface)
+- Text editor (e.g., VS Code, nano)
 # Features
 Real-time packet sniffing using Scapy
 Rule-based filtering for IP, port, protocol
